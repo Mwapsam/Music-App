@@ -34,10 +34,11 @@
     width: 40px;
     padding: 0.5rem;
     border-radius: 50%;
-    background-color: #283b8b;
+    background-color: #fff;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
-    color: #fff;
+    color: #283b8b;
+    font-size: 25px;
 
     position: absolute;
     top: 50%;
