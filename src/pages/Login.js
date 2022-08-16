@@ -1,15 +1,21 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import styles from '../styles/Login.module.css';
 import {
     auth,
     signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
   } from '../firebase';
   import { login } from '../redux/auth/userSlice';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+    const [error, setError] = useState('');
+
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleLogin = async (e) => {
@@ -20,24 +26,51 @@ const Login = () => {
                 dispatch(login({
                     email: userAuth.user.email,
                     uid: userAuth.user.uid,
-                    displayName: userAuth.user.displayName,
+                    password: userAuth.user.password,
                 }
                 ))
+                navigate('/');
             }).catch( (error) => {
                 console.log(error);
         
             })}
 
+    const googleAuthProvider =  () => {
+        const googleAuthProvider = new GoogleAuthProvider();
+        return signInWithPopup(auth, googleAuthProvider);
+    }
+
+    const handleGoogleLogin = async (e) => {
+        try {
+            await googleAuthProvider();
+            navigate('/');
+        } catch (error) {
+            setError(error.message);
+        }
+    }
+
 
 
   return (
-    <div>
-        <form onSubmit={handleLogin}>
-            <input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <input type="text" placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
-            <button type="submit">Login</button>
-        </form>
+    <div className={styles.main_card}>
+        <div className={styles.signup_card}>
+            <form onSubmit={handleLogin} className={styles.signup_form}>
+                <h3 className={styles.form_title}>Login</h3>
+                {error && <p>{error}</p>}
+                <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button type="submit" className={styles.button}>Login</button>
+            </form>
+        </div>
+        <div className={styles.items_content}>
+            <a href='/reset-password'>Forgot password?</a>
+            <div className={styles.google_btn} onClick={handleGoogleLogin}>
+                <div className={styles.google_icon_wrapper}>
+                    <img className={styles.google_icon} src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt='google'/>
+                </div>
+                <p className={styles.btn_text}><b>Login with google</b></p>
+            </div>
+        </div>
     </div>
   )
 }
