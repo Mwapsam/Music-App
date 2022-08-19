@@ -4,6 +4,7 @@ import {
   collection,
   getDocs,
   addDoc,
+  setDoc,
   deleteDoc,
   serverTimestamp,
   doc,
@@ -11,6 +12,7 @@ import {
   limit,
   onSnapshot,
   query,
+  Timestamp,
 } from 'firebase/firestore';
 
 import {
@@ -22,6 +24,7 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  sendEmailVerification,
 } from 'firebase/auth';
 
 import { getAnalytics } from "firebase/analytics";
@@ -61,4 +64,7 @@ export {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  sendEmailVerification,
+  Timestamp,
+  setDoc,
 };
