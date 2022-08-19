@@ -7,6 +7,7 @@ import {
     updateProfile,
     GoogleAuthProvider,
     signInWithPopup,
+    sendEmailVerification
   } from '../firebase';
   import { login } from '../redux/auth/userSlice';
   import styles from '../styles/Signup.module.css';
@@ -19,6 +20,15 @@ const Signup = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const sendEmail = async () => {
+        sendEmailVerification(auth.currentUser)
+        .then(() => {
+            console.log('email sent');
+            navigate('/email-verification');
+        });
+    }
+
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -36,9 +46,11 @@ const Signup = () => {
                             email: userAuth.user.email,
                             uid: userAuth.user.uid,
                             displayName: userAuth.user.displayName,
+                            password: userAuth.user.password,
+                            emailVerified: userAuth.user.emailVerified,
                         }
                         ))
-                        navigate('/login');
+                        sendEmail();
                     }).catch( (error) => {
                         Error(error);
                     }
