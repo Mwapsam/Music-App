@@ -1,28 +1,21 @@
-.song_card:hover {
-  transform: scale(1.01);
-}
-
-.song_title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-}
-
-.artist_name {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-}
-
 .song_content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.play_icon {
+  display: none;
+}
+
+.song_card:hover .play_icon {
+  display: block;
+  font-size: 2.5rem;
+  text-align: center;
+  color: aquamarine;
+  cursor: pointer;
+  position: absolute;
 }
 
 @media screen and (max-width: 768px) {
@@ -42,16 +35,55 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
     cursor: pointer;
-    max-height: 7rem;
+    max-height: 6rem;
     background-color: rgb(134, 134, 134);
     overflow: hidden;
     margin: 1rem;
+    position: relative;
   }
 
   .song_image {
-    width: 8rem;
-    height: 6rem;
+    width: 5rem;
+    height: 4rem;
     border-radius: 10px;
+  }
+
+  .song_title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    padding: 7px;
+  }
+
+  .artist_name {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    padding: 7px;
+  }
+
+  .search_form {
+    border-radius: 1px;
+    box-shadow: 0 0 10px rgba(221, 221, 221, 0.5);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    background-color: #fff;
+    height: 2rem;
+    width: 15rem;
+    position: relative;
+    margin: auto;
+  }
+
+  .search_form input {
+    width: 100%;
+    border: none;
+    padding: 10px;
+  }
+
+  textarea:focus, input:focus{
+    outline: none;
   }
 }
 
@@ -75,6 +107,7 @@
         cursor: pointer;
         max-height: 7rem;
         background-color: rgb(134, 134, 134);
+        position: relative;
       }
 
       .song_image {
@@ -82,4 +115,43 @@
         height: 100%;
         border-radius: 10px;
       }
+
+      .song_title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .artist_name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .search_form {
+        border-radius: 1px;
+        box-shadow: 0 0 10px rgba(221, 221, 221, 0.5);
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        background-color: #fff;
+        height: 2rem;
+        width: 15rem;
+        position: relative;
+        margin: auto;
+      }
+
+      .search_form input {
+        width: 100%;
+        border: none;
+        padding: 10px;
+      }
+
+      textarea:focus, input:focus{
+        outline: none;
+      }
+
 }
