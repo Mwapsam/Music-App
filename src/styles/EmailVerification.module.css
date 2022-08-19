@@ -1,0 +1,32 @@
+.email_card {
+    padding: 50px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 7% auto 0 auto;
+    width: 750px;
+    height: 250px;
+    position: relative;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+ p {
+    font-size: 15px;
+}
+
+.content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0 10px 0;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+}
