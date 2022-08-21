@@ -24,7 +24,6 @@ const Signup = () => {
     const sendEmail = async () => {
         sendEmailVerification(auth.currentUser)
         .then(() => {
-            console.log('email sent');
             navigate('/email-verification');
         });
     }
