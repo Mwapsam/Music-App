@@ -50,3 +50,12 @@
     font-weight: bold;
     margin-bottom: 15px;
 }
+
+.inputs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+}
+
