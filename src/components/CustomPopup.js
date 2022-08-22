@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import popupStyles from "../styles/CustomPopup.module.css";
 import PropTypes from "prop-types";
+
 const CustomPopup = (props) => {
   const [show, setShow] = useState(false);
 
@@ -22,7 +23,6 @@ const CustomPopup = (props) => {
       className={popupStyles.overlay}
     >
       <div className={popupStyles.popup}>
-        <h2>{props.title}</h2>
         <span className={popupStyles.close} onClick={closeHandler}>
           &times;
         </span>
@@ -33,7 +33,6 @@ const CustomPopup = (props) => {
 };
 
 CustomPopup.propTypes = {
-  title: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired
 };
