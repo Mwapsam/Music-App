@@ -15,7 +15,7 @@ import {
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+    const [displayName, setdisplayName] = useState('');
     const [error, setError] = useState('');
 
     const dispatch = useDispatch();
@@ -32,14 +32,14 @@ const Signup = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
 
-        if(!email || !password || !name) {
+        if(!email || !password || !displayName) {
             setError('Please fill all fields');
             return;
         }
 
         createUserWithEmailAndPassword(auth, email, password)
             .then( (userAuth) => {
-                updateProfile(auth, name)
+                updateProfile(auth, displayName)
                     .then( () => {
                         dispatch(login({
                             email: userAuth.user.email,
@@ -47,6 +47,7 @@ const Signup = () => {
                             displayName: userAuth.user.displayName,
                             password: userAuth.user.password,
                             emailVerified: userAuth.user.emailVerified,
+
                         }
                         ))
                         sendEmail();
@@ -78,21 +79,19 @@ const Signup = () => {
         <div className={styles.signup_card}>
             <form onSubmit={handleSignup} className={styles.signup_form}>
                 <h3 className={styles.form_title}>Register</h3>
-                {error && <p>{error}</p>}
-                <input type="text" placeholder="Username" value={name} onChange={(e) => setName(e.target.value)} />
+                {error && <p className={styles.errors}>{error}</p>}
+                <input type="text" placeholder="Username" value={displayName} onChange={(e) => setdisplayName(e.target.value)} />
                 <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit" className={styles.button}>Register</button>
-            </form>
-        </div>
-        <div className={styles.items_content}>
-            <p>Already have an account? <a href="/login">Login</a></p>
-            <div className={styles.google_btn} onClick={handleGoogleSignup}>
+                <div className={styles.google_btn} onClick={handleGoogleSignup}>
                 <div className={styles.google_icon_wrapper}>
                     <img className={styles.google_icon} src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt='google'/>
                 </div>
-                <p className={styles.btn_text}><b>Signup with google</b></p>
-            </div>
+                    <p className={styles.btn_text}><b>Signup with google</b></p>
+                </div>
+                <p>Already have an account? <a href="/login">Login</a></p>
+            </form>
         </div>
     </div>
   )
