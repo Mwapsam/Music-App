@@ -12,7 +12,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     margin: 7% auto 0 auto;
     width: 350px;
-    height: 250px;
+    height: 370px;
     position: relative;
 }
 
@@ -48,7 +48,7 @@
 .form_title {
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin: 13px;
 }
 
 .items_content {
@@ -63,7 +63,7 @@
     display: flex;
     align-items: center;
     gap: 40px;
-    width: 254px;
+    width: 80%;
     height: 42px;
     background-color: rgb(121, 119, 119);
     border-radius: 5px;
@@ -96,4 +96,10 @@
 a {
     text-decoration: none;
     padding: 5px;
+}
+
+.errors {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 12px;
 }
