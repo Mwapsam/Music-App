@@ -20,6 +20,11 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+
+        if(!email || !password) {
+            setError('Please fill all fields');
+            return;
+        }
         
         signInWithEmailAndPassword(auth, email, password)
             .then( (userAuth) => {
@@ -56,20 +61,19 @@ const Login = () => {
         <div className={styles.signup_card}>
             <form onSubmit={handleLogin} className={styles.signup_form}>
                 <h3 className={styles.form_title}>Login</h3>
-                {error && <p>{error}</p>}
+                {error && <p className={styles.errors}>{error}</p>}
                 <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit" className={styles.button}>Login</button>
-            </form>
-        </div>
-        <div className={styles.items_content}>
-            <a href='/reset-password'>Forgot password?</a>
-            <div className={styles.google_btn} onClick={handleGoogleLogin}>
+                <div className={styles.google_btn} onClick={handleGoogleLogin}>
                 <div className={styles.google_icon_wrapper}>
                     <img className={styles.google_icon} src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt='google'/>
                 </div>
-                <p className={styles.btn_text}><b>Login with google</b></p>
-            </div>
+                    <p className={styles.btn_text}><b>Login with google</b></p>
+                </div>
+                <p className={styles.account_text}>Don't have an account? <a href="/signup">Register</a></p>
+                <a href='/reset-password'>Forgot password?</a>
+            </form>
         </div>
     </div>
   )
