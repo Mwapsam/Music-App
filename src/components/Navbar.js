@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { FaHamburger } from 'react-icons/fa'
+import { auth, signOut } from '../firebase';
 import styles from '../styles/Navbar.module.css'
 
 const Navbar = () => {
@@ -8,6 +9,9 @@ const Navbar = () => {
   const toggleNavbar = () => {
     setIsOpen(!isOpen)
   }
+
+  const user = auth.currentUser;
+  console.log(user);
 
   return (
     <div>
@@ -26,6 +30,17 @@ const Navbar = () => {
             <li className={styles.lists}>
               <Link to="/about" className={styles.links}>About</Link>
             </li>
+            {user ? (
+              <li className={styles.lists}>
+                
+                <span className={styles.links} onClick={() => signOut(auth)}>Logout</span>
+
+              </li>
+            ) : (
+              <li className={styles.lists}>
+                <Link to="/login" className={styles.links}>Login</Link>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
