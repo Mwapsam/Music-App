@@ -9,17 +9,21 @@ import {
     signInWithPopup,
   } from '../firebase';
   import { login } from '../redux/auth/userSlice';
+  import { LoadingSpinner } from '../components';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
 
         if(!email || !password) {
             setError('Please fill all fields');
@@ -28,16 +32,19 @@ const Login = () => {
         
         signInWithEmailAndPassword(auth, email, password)
             .then( (userAuth) => {
-                dispatch(login({
-                    email: userAuth.user.email,
-                    uid: userAuth.user.uid,
-                    password: userAuth.user.password,
-                }
+                setTimeout( async () => {
+                    dispatch(login({
+                        email: userAuth.user.email,
+                        uid: userAuth.user.uid,
+                        password: userAuth.user.password,
+                    }
                 ))
+                setIsLoading(false);
+                }, 3000)
                 navigate('/');
             }).catch( (error) => {
-                console.log(error);
-        
+                setError(error.message)
+                setIsLoading(false);
             })}
 
     const googleAuthProvider =  () => {
@@ -59,12 +66,12 @@ const Login = () => {
   return (
     <div className={styles.main_card}>
         <div className={styles.signup_card}>
-            <form onSubmit={handleLogin} className={styles.signup_form}>
+            {isLoading ? <LoadingSpinner /> : (<form onSubmit={handleLogin} className={styles.signup_form}>
                 <h3 className={styles.form_title}>Login</h3>
                 {error && <p className={styles.errors}>{error}</p>}
                 <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit" className={styles.button}>Login</button>
+                <button type="submit" className={styles.button} disabled={isLoading}>Login</button>
                 <div className={styles.google_btn} onClick={handleGoogleLogin}>
                 <div className={styles.google_icon_wrapper}>
                     <img className={styles.google_icon} src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt='google'/>
@@ -73,7 +80,7 @@ const Login = () => {
                 </div>
                 <p className={styles.account_text}>Don't have an account? <a href="/signup">Register</a></p>
                 <a href='/reset-password'>Forgot password?</a>
-            </form>
+            </form>)}
         </div>
     </div>
   )
