@@ -66,7 +66,6 @@ const AdminPlayList = () => {
 
     const handleDelete = async (data) => {
       const taskDocRef = doc(db, 'music', data.id)
-      console.log(data.id);
         try{
           await deleteDoc(taskDocRef)
           setMessage('The song was successfully deleted')
