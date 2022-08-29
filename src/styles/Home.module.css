@@ -224,7 +224,7 @@ and (max-width: 869px) {
 
       .song_img {
         width: 9rem;
-        height: 6rem;
+        height: 8rem;
         border-radius: 10px;
         border: none;
         background-color: #f45437c2;
@@ -244,26 +244,50 @@ and (max-width: 869px) {
         padding: 10px 0 0 0;
       }
 
-      .search_form {
-        border-radius: 1px;
-        box-shadow: 0 0 10px rgba(221, 221, 221, 0.5);
-        transition: all 0.3s ease-in-out;
-        cursor: pointer;
-        background-color: #fff;
-        height: 2rem;
-        width: 15rem;
-        position: relative;
+      .box {
+        max-width: 400px;
+        width: 100%;
         margin: auto;
+        padding: 40px;
+      }
+
+      .search_form {
+        height: 50px;
+        position: relative;
       }
 
       .search_form input {
+        position: absolute;
+        height: 100%;
         width: 100%;
+        border-radius: 8px;
+        background: #fff;
+        outline: none;
         border: none;
-        padding: 10px;
+        padding-left: 20px;
+        font-size: 18px;
+        box-shadow: 0 5px 10px rgba(130, 130, 130, 0.25);
+      }
+
+      .search_icon {
+        position: absolute;
+        right: -2px;
+        top: 0;
+        width: 50px;
+        height: 100%;
+        text-align: center;
+        line-height: 50px;
+        background: rgb(244, 244, 244);
+        font-size: 18px;
+        color: rgb(81, 81, 81);
       }
 
       textarea:focus, input:focus{
         outline: none;
+      }
+
+      .main_card {
+        display: flex;
       }
 
 }
